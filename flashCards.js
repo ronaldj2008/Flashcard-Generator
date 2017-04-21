@@ -8,13 +8,13 @@ exports.BasicCard = function (front, back) {
 exports.ClozeCard = function(text, cloze) {
 
 	var textToLower = text.toLowerCase();
-	var clozetoLower = close.toLowerCase();
+	var clozetoLower = cloze.toLowerCase();
+	// console.log(textToLower, clozetoLower);
+	// if(!textToLower.includes(clozetoLower)) {
+	// 	console.log('Error: cloze-deletion does not appear within full text -- <' + cloze + '>');
+	// 	return;
 
-	if(!textToLower.includes(clozetoLower)) {
-		console.log('Error: cloze-deletion does not appear within full text -- <' + cloze + '>');
-		return;
-
-	}
+	// }
 
 	this.full = text;
 	this.cloze = cloze;

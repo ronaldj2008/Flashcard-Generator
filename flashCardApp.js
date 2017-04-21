@@ -1,9 +1,9 @@
 
 var inquirer = require ('inquirer');
 
-var flashCards = require ('flashCards.js');
+var flashCards = require ('./flashCards.js');
 
-var questions = require ('questions.js').questions;
+var questions = require ('./questions.js').questions;
 
 var closeQuestions = [];
 
@@ -22,14 +22,15 @@ var answerWrong = 0;
 function askQuestion() {
 		inquirer.prompt ([
 		{
-			type:'input'
-			message: closeQuestions[currentQuestion].partial + '\nAnswer: ',
+			type:'input',
+			message: closeQuestions[currentQuestion].full + '\nAnswer: ',
 			name: 'userGuess'
 		}
 	]).then(function(answers) {
+		console.log(answers);
 		console.log('\n');
 
-		if (answers.userGuess).toLowerCase() === closeQuestions.[currentQuestion].cloze.toLowerCase()) {
+		if (answers.userGuess.toLowerCase() === closeQuestions[currentQuestion].cloze.toLowerCase()) {
 		console.log('Right!');
 		answerRight++;
 
@@ -51,26 +52,29 @@ function askQuestion() {
 
 			console.log('-------------------\n');
 
-			inquirer.prompt([
-				{
-					type: 'confirm',
-					message: 'Would you like to play again?',
-					name: 'playAgain'
-				}
-				]).then(function(answers)	{
-					if (answers.playAgain)	{
+			// inquirer.prompt([
+			// 	{
+			// 		type: 'confirm',
+			// 		message: 'Would you like to play again?',
+			// 		name: 'playAgain'
+			// 	}
+			// 	]).then(function(answers)	{
+			// 		if (answers.playAgain)	{
 
-						currentQuestion = 0;
-						answerRight = 0;
-						answerWrong = 0;
+			// 			currentQuestion = 0;
+			// 			answerRight = 0;
+			// 			answerWrong = 0;
 
-						askQuestion();
-					} else {
+			// 			askQuestion();
+			// 		} else {
 
-						console.log ('Thanks for playing! Peace!');
-					}
-			})
+			// 			console.log ('Thanks for playing! Peace!');
+			// 		}
+			// })
 		}
+	})
+	.catch(function(err) {
+		console.log(err);
 	})	
 
 }
